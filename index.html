@@ -125,7 +125,8 @@ const scheduleRows=[
  {time:'12:10',left:['Putra 3','Putra 5'],right:['Putra 8','Putra 10']},
  {time:'13:00',left:['Putra 2','Putra 4'],right:['Putra 7','Putra 9']}
 ];
-const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1','Team B2','Team B3','Team B4','Team B5'],W:['Team P1','Team P2','Team P3','Team P4']};\nconst matches=[];
+const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1','Team B2','Team B3','Team B4','Team B5'],W:['Team P1','Team P2','Team P3','Team P4']};
+const matches=[];
 let category='Putra',date='all';
 function renderSchedule(){document.getElementById('courtOne').innerHTML=scheduleRows.map(m=>'<div class="schedule-match"><div class="schedule-team">'+m.left[0]+'</div><div class="versus">VS</div><div class="schedule-team">'+m.left[1]+'</div></div>').join('');document.getElementById('matchTimes').innerHTML=scheduleRows.map(m=>'<div class="time-row">'+m.time+'</div>').join('');document.getElementById('courtFour').innerHTML=scheduleRows.map(m=>'<div class="schedule-match"><div class="schedule-team">'+m.right[0]+'</div><div class="versus">VS</div><div class="schedule-team">'+m.right[1]+'</div></div>').join('');}
 function renderTable(id,keys,categoryName){let games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');let stats=keys.map(n=>{let s={n,p:0,w:0,l:0,for:0,against:0};games.filter(m=>m.a===n||m.b===n).forEach(m=>{let isA=m.a===n,sc=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;s.p++;s.for+=sc;s.against+=opp;if(sc>opp)s.w++;else s.l++;});return s;}).sort((a,b)=>(b.w*3-a.w*3)||(b.for-b.against)-(a.for-a.against)||b.for-a.for);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td class="team">'+s.n+'</td><td>'+s.p+'</td><td>'+s.w+'</td><td>'+s.l+'</td><td><b>'+(s.w*3)+'</b></td><td>'+s.for+'</td><td>'+s.against+'</td><td>'+(s.for-s.against>0?'+':'')+(s.for-s.against)+'</td></tr>').join('');}
