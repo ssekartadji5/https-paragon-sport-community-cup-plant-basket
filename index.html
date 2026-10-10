@@ -79,12 +79,15 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
   .mini-standings .table-wrap{padding:0 8px 6px}
   .mini-standings th{padding:6px 4px;font-size:10px}
   .mini-standings td{padding:6px 4px;font-size:11px}
-  .schedule-grid{grid-template-columns:minmax(0,1fr) 82px minmax(0,1fr)}
-  .court-title,.time-title{padding:12px 8px;font-size:14px}
-  .schedule-match,.time-row{min-height:42px}
-  .schedule-team{padding:7px 5px;font-size:12px}
-  .versus{margin:9px 4px}
-  .time-row{padding:6px 4px;font-size:12px}
+  .schedule-grid{grid-template-columns:76px minmax(0,1fr) 70px minmax(0,1fr) 70px}
+  .court-title,.time-title,.result-title{padding:12px 5px;font-size:13px}
+  .schedule-match,.time-row,.result-row{min-height:38px}
+  .schedule-match{grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr)}
+  .schedule-team{padding:6px 4px;font-size:11px}
+  .versus{margin:9px 3px;font-size:9px}
+  .time-row,.result-row{padding:5px 3px;font-size:11px}
+  .schedule-grid{width:100%}
+  .left-col>.card{width:100%}
 }
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
