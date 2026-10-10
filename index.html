@@ -11,9 +11,9 @@
 html{scroll-behavior:smooth}
 body{margin:0;color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;background:#f7f7f7 url('./BASKET.png') center top/100% auto no-repeat;background-attachment:fixed;min-height:100vh}
 button{font:inherit;cursor:pointer}
-.site-header{position:sticky;top:10px;z-index:10;margin:12px auto 28px;width:min(1420px,calc(100% - 36px));display:flex;align-items:center;gap:24px;padding:14px 22px;border:1px solid rgba(255,255,255,.9);border-radius:18px;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);box-shadow:0 8px 28px #1111}
-.brand{min-width:255px;line-height:.95;font-weight:950;font-style:italic;letter-spacing:-1.4px;font-size:25px;transform:skew(-5deg)}
-.brand small{display:block;font-style:normal;font-size:10px;letter-spacing:1px;margin:0 0 8px;color:#374151}
+.site-header{position:relative;top:0;z-index:10;margin:0 auto 22px;width:100%;display:flex;align-items:center;gap:24px;padding:16px 28px;border:0;border-bottom:2px solid #ffffffaa;border-radius:0;background:rgba(17,21,29,.93);backdrop-filter:blur(14px);box-shadow:0 8px 28px #1113;color:#fff}
+.brand{min-width:255px;line-height:.95;font-weight:950;font-style:italic;letter-spacing:-1.4px;font-size:25px;transform:skew(-5deg);color:#fff;padding-right:22px;border-right:1px solid #ffffff66}
+.brand small{display:block;font-style:normal;font-size:10px;letter-spacing:1px;margin:0 0 8px;color:#c8ccd4}
 .brand em{font-style:normal;color:white;background:var(--red);padding:3px 8px;font-size:12px;letter-spacing:.3px}
 .nav{display:flex;align-items:center;justify-content:center;gap:8px;flex:1}
 .nav button,.admin-btn{border:0;background:transparent;color:#202833;font-size:13px;font-weight:800;padding:13px 15px;border-radius:8px}
@@ -63,7 +63,7 @@ td{padding:10px 8px;border-top:1px solid #e7e9ed;white-space:nowrap}
 footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
-@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:calc(100% - 18px);top:5px;margin-top:5px;padding:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
+@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:14px 16px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
 </style>
 </head>
 <body>
