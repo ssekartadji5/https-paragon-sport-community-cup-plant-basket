@@ -104,6 +104,16 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 .bracket-team{background:rgba(255,255,255,.82)}
 .women-final-match .bracket-team{background:rgba(255,255,255,.84)}
 
+/* Lower opacity on Schedule & Standings tables while preserving contrast */
+.schedule-grid .court-title,.schedule-grid .time-title,.schedule-grid .result-title{background:rgba(233,237,242,.68)}
+.schedule-grid .court-one,.schedule-grid .court-four{background:rgba(233,237,242,.62)}
+.schedule-grid .result-one,.schedule-grid .result-four{background:rgba(244,246,248,.62)}
+.schedule-match:hover{background:rgba(244,247,251,.78)}
+.mini-standings table{background:rgba(255,255,255,.58)}
+.mini-standings th{background:rgba(220,225,232,.48)}
+.mini-standings td{background:rgba(255,255,255,.50)}
+.mini-standings tbody tr:nth-child(even) td{background:rgba(225,229,235,.42)}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
