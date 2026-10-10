@@ -20,7 +20,7 @@ button{font:inherit;cursor:pointer}
 .nav button.active{box-shadow:inset 0 -3px var(--red);border-radius:0}
 .admin-btn{border:1px solid var(--red);border-radius:11px;white-space:nowrap;padding:13px 17px}
 main{width:min(1420px,calc(100% - 36px));margin:0 auto 48px}
-.page-title{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:24px 0 22px}
+.page-title{display:flex;align-items:center;justify-content:flex-end;gap:20px;margin:12px 0 14px}
 .eyebrow{font-size:12px;letter-spacing:4px;font-weight:800;color:#344155}
 h1{font-size:clamp(25px,3vw,38px);line-height:1.1;margin:6px 0 0;font-weight:950;letter-spacing:-1px}
 .switch{display:flex;background:var(--glass);padding:4px;border-radius:30px;border:1px solid white;box-shadow:0 4px 14px #0001}
@@ -79,7 +79,7 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 </header>
 <main>
   <section class="page-title" id="jadwal">
-    <div><div class="eyebrow">PARAGON BASKETBALL</div><h1>JADWAL PERTANDINGAN</h1></div>
+    <div aria-hidden="true"></div>
     <div class="switch" aria-label="Kategori"><button class="selected" data-category="Putra">PUTRA</button><button data-category="Putri">PUTRI</button></div>
   </section>
   <div class="date-tabs" id="dateTabs"><button class="selected" data-date="all">Semua<br>Tanggal</button><button data-date="2026-10-17">Sab, 17 Okt<br>2026</button><button data-date="2026-10-18">Min, 18 Okt<br>2026</button><button data-date="2026-10-24">Sab, 24 Okt<br>2026</button><button data-date="2026-10-25">Min, 25 Okt<br>2026</button></div>
