@@ -60,6 +60,32 @@ td{padding:10px 8px;border-top:1px solid #e7e9ed;white-space:nowrap}
 .final-card h3{margin:0;font-size:12px;padding:9px 0}
 .info{padding:14px 18px;color:#4b5563;font-size:13px;line-height:1.5}
 footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
+/* TV / large-display layout: fit a 16:9 screen at normal browser zoom */
+@media (min-width:1400px) and (min-height:760px){
+  body{background-size:100% 100%;background-position:center center}
+  .site-header{padding:10px 30px 12px;margin-bottom:16px}
+  .header-inner{gap:18px}
+  .header-logo{width:86px;height:70px;flex-basis:86px}
+  .header-title h1{font-size:clamp(24px,1.65vw,32px)}
+  .header-title p{font-size:13px}
+  .admin-icon{width:42px;height:42px}
+  main{width:calc(100% - 56px);max-width:1800px;margin-bottom:16px}
+  .page-title{margin:4px 0 12px}
+  .switch button{padding:10px 24px;font-size:13px}
+  .layout{grid-template-columns:minmax(0,1.85fr) minmax(370px,.95fr);gap:14px}
+  .left-col,.right-col{gap:12px}
+  .standings-sidebar{gap:10px}
+  .mini-standings .card-head{padding:9px 12px 6px;font-size:13px}
+  .mini-standings .table-wrap{padding:0 8px 6px}
+  .mini-standings th{padding:6px 4px;font-size:10px}
+  .mini-standings td{padding:6px 4px;font-size:11px}
+  .schedule-grid{grid-template-columns:minmax(0,1fr) 82px minmax(0,1fr)}
+  .court-title,.time-title{padding:12px 8px;font-size:14px}
+  .schedule-match,.time-row{min-height:42px}
+  .schedule-team{padding:7px 5px;font-size:12px}
+  .versus{margin:9px 4px}
+  .time-row{padding:6px 4px;font-size:12px}
+}
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{width:40px;height:40px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
