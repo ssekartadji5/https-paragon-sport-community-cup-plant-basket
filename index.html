@@ -185,6 +185,52 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 .schedule-team,.time-row,.result-row,.mini-standings table,.match-id,.versus,.bracket-team,.semi-caption{font-family:'Open Sans',Arial,sans-serif!important}
 .header-title h1{font-family:'Montserrat','Open Sans',Arial,sans-serif!important}
 
+/* TV mode: fit 16:9 screens without page scrolling */
+@media (min-width:1400px) and (min-height:760px){
+ html,body{height:100%;min-height:0;overflow:hidden}
+ body{display:flex;flex-direction:column;background-size:100% 100%}
+ .site-header{flex:0 0 auto;margin:0 0 10px;padding:7px 24px 9px}
+ .header-inner{min-height:66px;gap:14px}
+ .header-logo{width:68px;height:58px;flex-basis:68px}
+ .header-title h1{font-size:clamp(23px,1.6vw,30px)}
+ .header-title p{font-size:11px}
+ .header-switch button{padding:8px 18px;font-size:11px}
+ .admin-icon{height:36px;min-width:78px}
+ main{width:calc(100% - 48px);max-width:none;flex:1 1 auto;min-height:0;height:0;margin:0 auto 4px;display:flex;flex-direction:column}
+ .layout{flex:1 1 auto;min-height:0;height:100%;align-items:stretch;grid-template-columns:minmax(0,1.85fr) minmax(340px,.95fr);gap:12px}
+ .left-col,.right-col{min-height:0;gap:8px}
+ .left-col{grid-template-rows:auto minmax(0,1fr)}
+ .right-col{display:grid;grid-template-rows:auto repeat(3,minmax(0,1fr));align-content:stretch}
+ .section-heading{font-size:18px;min-height:28px;margin:0 0 0 2px;padding:5px 10px}
+ .section-heading .marker{height:18px}
+ #schedulePanel{min-height:0;height:100%;display:flex;flex-direction:column}
+ #schedulePanel .schedule-grid{flex:1 1 auto;min-height:0;height:100%;grid-template-rows:38px minmax(0,1fr)}
+ #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{display:grid;grid-template-rows:repeat(13,minmax(0,1fr));min-height:0;height:100%}
+ #schedulePanel .schedule-match,#schedulePanel .time-row,#schedulePanel .result-row{height:auto;min-height:0}
+ #schedulePanel .schedule-match{grid-template-rows:12px minmax(0,1fr)}
+ #schedulePanel .schedule-team{font-size:clamp(9px,.65vw,12px);padding:2px}
+ #schedulePanel .match-id{font-size:clamp(6px,.38vw,8px)}
+ #schedulePanel .versus{margin:3px 2px;font-size:8px}
+ #schedulePanel .time-row,#schedulePanel .result-row{font-size:clamp(9px,.58vw,11px);padding:2px}
+ #standingsSidebar .mini-standings{min-height:0;height:100%;display:flex;flex-direction:column}
+ #standingsSidebar .mini-standings .card-head{padding:6px 10px 4px;font-size:clamp(10px,.72vw,13px)}
+ #standingsSidebar .mini-standings .table-wrap{padding:0 6px 4px;min-height:0;flex:1}
+ #standingsSidebar .mini-standings table{height:100%;font-size:clamp(9px,.58vw,11px)}
+ #standingsSidebar .mini-standings th{padding:3px 4px;font-size:clamp(8px,.52vw,10px)}
+ #standingsSidebar .mini-standings td{padding:3px 4px;font-size:clamp(9px,.58vw,11px)}
+ #standingsSidebar .mini-standings .rank{padding:2px 5px}
+ footer{flex:0 0 auto;padding:4px 8px;font-size:9px}
+ .final-page{overflow:hidden;min-height:0}
+ .final-page>.card{min-height:0}
+ .final-four-board{padding:6px 16px 10px;gap:14px}
+ .final-four-side .bracket-match,.final-four-center .bracket-match{padding:8px}
+ .final-four-side .bracket-team,.final-four-center .bracket-team{padding:6px}
+ .final-four-center{gap:12px;padding:8px 0}
+ .women-final-layout{padding:2px 14px 10px}
+ .women-final-note{padding:10px}
+ .women-final-match{padding:6px}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
