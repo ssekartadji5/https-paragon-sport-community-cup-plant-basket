@@ -754,7 +754,8 @@ function updateMenConnectorLines(){
  const F1=point(finalCard,.30,0),F2=point(finalCard,.70,0);
  const T1=point(third,0,.5),T2=point(third,1,.5);
  const elbowY=Math.min(F1.y,F2.y)-Math.max(24,br.height*.045);
- const outerLeft=Math.max(10,point(left,0,0).x-18),outerRight=Math.min(br.width-10,point(right,1,0).x+18);
+ const leftEdge=point(left,0,0).x,rightEdge=point(right,1,0).x;
+ const outerLeft=Math.max(18,leftEdge+24),outerRight=Math.min(br.width-18,rightEdge-24);
  gold.setAttribute('d',`M ${L.x} ${L.y} V ${elbowY} H ${F1.x} V ${F1.y} M ${R.x} ${R.y} V ${elbowY} H ${F2.x} V ${F2.y}`);
  silver.setAttribute('d',`M ${outerLeft} ${L.y} V ${T1.y} H ${T1.x} M ${outerRight} ${R.y} V ${T2.y} H ${T2.x}`);
  svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
