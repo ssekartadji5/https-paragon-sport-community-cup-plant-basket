@@ -540,6 +540,24 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
   #babak .men-connector-overlay .connector-silver{stroke:#B8C0CC!important;stroke-width:2.5!important}
 }
 
+
+/* Responsive bracket connectors: anchor to the board proportions on wide displays */
+@media(min-width:851px){
+  #babak .final-four-board{position:relative!important}
+  #babak .men-connector-overlay{
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    overflow:hidden!important;
+  }
+  #babak .men-connector-overlay .connector-gold{stroke:#D6A637!important;stroke-width:2.5!important}
+  #babak .men-connector-overlay .connector-silver{stroke:#B8C0CC!important;stroke-width:2.5!important}
+}
+@media(min-width:1400px) and (min-height:760px){
+  #babak .final-four-board{padding-bottom:34px!important}
+  #babak .men-connector-overlay{inset:0 0 0 0!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
@@ -577,8 +595,8 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
         <div class="card-head"><span class="marker"></span>MEN’S PLAYOFFS <span class="final-kicker">ROAD TO THE CHAMPIONSHIP</span></div>
         <div class="final-four-board">
           <svg class="men-connector-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <path class="connector-gold" d="M28 22 V28 H40 V41 M72 22 V28 H60 V41"/>
-            <path class="connector-silver" d="M15 22 V84 H38 M85 22 V84 H62"/>
+            <path class="connector-gold" d="M28 20 V27 H42 V43 M72 20 V27 H58 V43"/>
+            <path class="connector-silver" d="M14 20 V87 H36 M86 20 V87 H64"/>
           </svg>
           <div class="final-four-side left-semi">
             <div class="round-label">SEMIFINAL 01</div>
