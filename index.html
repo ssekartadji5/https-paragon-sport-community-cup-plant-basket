@@ -231,6 +231,26 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
  .women-final-match{padding:6px}
 }
 
+/* TV fit refinement: use available screen height for rows, not empty page space */
+@media (min-width:1400px) and (min-height:760px){
+ main{margin-bottom:0!important}
+ .layout{height:100%!important;flex:1 1 0!important;align-items:stretch!important}
+ .left-col,.right-col{height:100%!important}
+ .left-col{grid-template-rows:28px minmax(0,1fr)!important}
+ .right-col{grid-template-rows:28px repeat(3,minmax(0,1fr))!important}
+ #schedulePanel{height:100%!important;min-height:0!important}
+ #schedulePanel .schedule-grid{height:100%!important;min-height:0!important;grid-template-rows:34px minmax(0,1fr)!important}
+ #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{height:100%!important;grid-template-rows:repeat(13,minmax(0,1fr))!important}
+ #schedulePanel .schedule-match{grid-template-rows:14px minmax(0,1fr)!important}
+ #schedulePanel .schedule-team{font-size:clamp(10px,.72vw,13px)!important}
+ #schedulePanel .match-id{font-size:clamp(7px,.42vw,9px)!important}
+ #schedulePanel .time-row,#schedulePanel .result-row{font-size:clamp(10px,.65vw,12px)!important}
+ #standingsSidebar .mini-standings .card-head{padding:8px 10px 5px!important}
+ #standingsSidebar .mini-standings th{padding:5px 4px!important}
+ #standingsSidebar .mini-standings td{padding:5px 4px!important}
+ footer{padding:2px 8px!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
