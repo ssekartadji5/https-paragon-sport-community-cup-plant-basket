@@ -396,6 +396,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 .live-status{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.9);border:1px solid #fff;border-radius:30px;padding:12px 16px;font-size:11px;font-weight:950;letter-spacing:1px;white-space:nowrap;box-shadow:0 4px 14px #0001}
 .live-status-dot{width:9px;height:9px;border-radius:50%;background:#e6a52d;box-shadow:0 0 0 4px #e6a52d22}
 .live-score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}
+.live-score-grid.single-live-grid{grid-template-columns:minmax(0,1fr);max-width:1180px;margin:0 auto}.single-live-grid .live-score-card{width:100%}
 .live-score-card{--live-accent:#215aa8;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:440px;padding:clamp(18px,2.2vw,32px);border:2px solid rgba(255,255,255,.95);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(244,247,251,.94));box-shadow:0 12px 30px #151a2020}
 .live-score-card:before{content:"";position:absolute;top:0;left:0;right:0;height:9px;background:var(--live-accent)}
 .court4-live{--live-accent:#fe1b0a}
@@ -427,7 +428,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 </head>
 <body>
 <header class="site-header">
-  <div class="header-inner"><img class="header-logo" src="./Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Logo Paragon Sport Community Cup"><div class="header-title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON BASKETBALL PLANT</p></div><nav class="header-switch switch section-switch" aria-label="Website sections"><button class="selected" data-view="jadwal">SCHEDULE &amp; STANDINGS</button><button data-view="live">LIVE SCOREBOARD</button><button data-view="babak">FINAL</button></nav><button class="admin-icon" id="adminOpen" type="button" aria-label="Admin Control" title="Admin Control"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 10.2h8M8 13.8h5"/><circle cx="16.3" cy="15.8" r="2.2"/><path d="m17.9 17.4 1.3 1.3"/></svg><span class="admin-label">ADMIN</span></button></div>
+  <div class="header-inner"><img class="header-logo" src="./Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Logo Paragon Sport Community Cup"><div class="header-title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON BASKETBALL PLANT</p></div><nav class="header-switch switch section-switch" aria-label="Website sections"><button class="selected" data-view="jadwal">SCHEDULE &amp; STANDINGS</button><button data-view="court1">COURT 1</button><button data-view="court2">COURT 2</button><button data-view="babak">FINAL</button></nav><button class="admin-icon" id="adminOpen" type="button" aria-label="Admin Control" title="Admin Control"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 10.2h8M8 13.8h5"/><circle cx="16.3" cy="15.8" r="2.2"/><path d="m17.9 17.4 1.3 1.3"/></svg><span class="admin-label">ADMIN</span></button></div>
 </header>
 <main>
   <section class="page-title" id="jadwal">
@@ -509,18 +510,27 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
       
     </aside>
   </div>
-  <section class="live-scoreboard-page" id="liveScoreboard" hidden aria-label="Live scoreboard">
+    <section class="live-scoreboard-page" id="court1Page" hidden aria-label="Scoreboard Court 1">
     <div class="live-page-heading">
-      <div><div class="live-eyebrow">PUBLIC DISPLAY · COURT 1 &amp; COURT 2</div><h2>LIVE SCOREBOARD</h2><p>Skor pertandingan ditampilkan dalam ukuran besar agar mudah dilihat dari kejauhan.</p></div>
-      <div class="live-status"><span class="live-status-dot"></span><span>LIVE DISPLAY</span></div>
+      <div><div class="live-eyebrow">PUBLIC DISPLAY · COURT 1</div><h2>SCOREBOARD COURT 1</h2><p>Skor pertandingan ditampilkan dalam ukuran besar agar mudah dilihat dari kejauhan.</p></div>
+      <div class="live-status"><span class="live-status-dot"></span><span>COURT 1</span></div>
     </div>
-    <div class="live-score-grid">
+    <div class="live-score-grid single-live-grid">
       <section class="live-score-card court1-live" aria-label="Scoreboard Court 1">
         <div class="live-score-top"><span class="live-court-tag">COURT 1</span><span class="live-match-id">MEN · M01</span></div>
         <div class="live-match-teams"><div class="live-team-name" id="liveCourt1TeamA">TEAM A1</div><div class="live-versus">VS</div><div class="live-team-name" id="liveCourt1TeamB">TEAM A2</div></div>
         <div class="live-score-numbers"><div class="live-score-number" id="liveCourt1ScoreA">—</div><span>:</span><div class="live-score-number" id="liveCourt1ScoreB">—</div></div>
         <div class="live-score-footer"><span class="live-score-state">WAITING FOR SCORE</span><span class="live-score-hint">SCOREBOARD 01</span></div>
       </section>
+    </div>
+    <div class="live-display-note"><span class="live-note-icon">ⓘ</span><span>Halaman ini disiapkan untuk layar scoreboard Court 1. Skor otomatis/live akan aktif setelah input skor Admin dihubungkan ke database bersama.</span></div>
+  </section>
+  <section class="live-scoreboard-page" id="court2Page" hidden aria-label="Scoreboard Court 2">
+    <div class="live-page-heading">
+      <div><div class="live-eyebrow">PUBLIC DISPLAY · COURT 2</div><h2>SCOREBOARD COURT 2</h2><p>Skor pertandingan ditampilkan dalam ukuran besar agar mudah dilihat dari kejauhan.</p></div>
+      <div class="live-status"><span class="live-status-dot"></span><span>COURT 2</span></div>
+    </div>
+    <div class="live-score-grid single-live-grid">
       <section class="live-score-card court2-live" aria-label="Scoreboard Court 2">
         <div class="live-score-top"><span class="live-court-tag">COURT 2</span><span class="live-match-id">MEN · M02</span></div>
         <div class="live-match-teams"><div class="live-team-name" id="liveCourt2TeamA">TEAM B1</div><div class="live-versus">VS</div><div class="live-team-name" id="liveCourt2TeamB">TEAM B2</div></div>
@@ -528,7 +538,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
         <div class="live-score-footer"><span class="live-score-state">WAITING FOR SCORE</span><span class="live-score-hint">SCOREBOARD 02</span></div>
       </section>
     </div>
-    <div class="live-display-note"><span class="live-note-icon">ⓘ</span><span>Halaman ini disiapkan untuk layar scoreboard tambahan. Skor otomatis/live akan aktif setelah input skor Admin dihubungkan ke database bersama.</span></div>
+    <div class="live-display-note"><span class="live-note-icon">ⓘ</span><span>Halaman ini disiapkan untuk layar scoreboard Court 2. Skor otomatis/live akan aktif setelah input skor Admin dihubungkan ke database bersama.</span></div>
   </section>
   <section class="standings" id="klasemen" hidden>
     <div class="card"><div class="card-head"><span class="marker blue"></span>KLASEMEN PUTRA - GRUP A</div><div class="table-wrap"><table><thead><tr><th>Pos</th><th>Tim</th><th>Main</th><th>Menang</th><th>Kalah</th><th>Poin</th><th>Point +</th><th>Point -</th><th>Selisih</th></tr></thead><tbody id="groupA"></tbody></table></div></div>
@@ -580,11 +590,11 @@ function renderSchedule(){
 function renderTable(id,keys,categoryName){let games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');let stats=keys.map(n=>{let s={n,p:0,w:0,l:0,for:0,against:0};games.filter(m=>m.a===n||m.b===n).forEach(m=>{let isA=m.a===n,sc=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;s.p++;s.for+=sc;s.against+=opp;if(sc>opp)s.w++;else s.l++;});return s;}).sort((a,b)=>(b.w*3-a.w*3)||(b.for-b.against)-(a.for-a.against)||b.for-a.for);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td class="team">'+s.n+'</td><td>'+s.p+'</td><td>'+s.w+'</td><td>'+s.l+'</td><td><b>'+(s.w*3)+'</b></td><td>'+s.for+'</td><td>'+s.against+'</td><td>'+(s.for-s.against>0?'+':'')+(s.for-s.against)+'</td></tr>').join('');}
 function renderSidebarTable(id,keys,categoryName){const games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');const stats=keys.map(name=>{let w=0,l=0,scored=0,against=0;games.filter(m=>m.a===name||m.b===name).forEach(m=>{const isA=m.a===name,score=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;scored+=score;against+=opp;if(score>opp)w++;else if(score<opp)l++;});return {name,w,l,pts:w*3,diff:scored-against};}).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.w-a.w);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td>'+s.name+'</td><td><b>'+s.w+'</b></td><td>'+s.l+'</td><td><b>'+s.pts+'</b></td></tr>').join('');}
 function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');}
-document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('selected',x===b));document.getElementById('schedulePanel').hidden=(view!=='jadwal');document.getElementById('standingsSidebar').hidden=(view!=='jadwal');document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=(view!=='babak');document.getElementById('liveScoreboard').hidden=(view!=='live');document.querySelector('.layout').hidden=(view==='live');document.querySelector('.layout').style.gridTemplateColumns=(view==='jadwal'?'minmax(0,1.9fr) minmax(300px,.95fr)':'minmax(0,1fr)');window.scrollTo({top:0,behavior:'smooth'});}));
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('selected',x===b));document.getElementById('schedulePanel').hidden=(view!=='jadwal');document.getElementById('standingsSidebar').hidden=(view!=='jadwal');document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=(view!=='babak');document.getElementById('court1Page').hidden=(view!=='court1');document.getElementById('court2Page').hidden=(view!=='court2');document.querySelector('.layout').hidden=(view==='court1'||view==='court2');document.querySelector('.layout').style.gridTemplateColumns=(view==='jadwal'?'minmax(0,1.9fr) minmax(300px,.95fr)':'minmax(0,1fr)');window.scrollTo({top:0,behavior:'smooth'});}));
 document.querySelectorAll('[data-date]').forEach(b=>b.addEventListener('click',()=>{date=b.dataset.date;document.querySelectorAll('[data-date]').forEach(x=>x.classList.toggle('selected',x===b));renderSchedule();}));
 document.querySelectorAll('[data-section]').forEach(b=>b.addEventListener('click',()=>{let id=b.dataset.section;document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('[data-section]').forEach(x=>x.classList.toggle('active',x===b));}));
 document.getElementById('adminOpen').addEventListener('click',()=>alert('Admin Control akan diaktifkan setelah autentikasi aman dan koneksi Supabase disiapkan.'));
-document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.getElementById('liveScoreboard').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();
+document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.getElementById('court1Page').hidden=true;document.getElementById('court2Page').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();
 </script>
 </body>
 </html>
