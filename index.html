@@ -9,7 +9,7 @@
 :root{--red:#FE1B0A;--blue:#215AA8;--burgundy:#420511;--ink:#171b22;--muted:#677080;--line:#e4e7eb;--glass:rgba(255,255,255,.91)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;background:#f7f7f7 url('./BASKET.png') center top/100% auto no-repeat;background-attachment:fixed;min-height:100vh}
+body{margin:0;color:var(--ink);font-family:'Open Sans',Arial,Helvetica,sans-serif;background:#f7f7f7 url('./BASKET.png') center top/100% auto no-repeat;background-attachment:fixed;min-height:100vh}
 button{font:inherit;cursor:pointer}
 .site-header{position:relative;top:0;z-index:10;margin:0 auto 22px;width:100%;display:block;padding:18px 26px 20px;border:0;border-bottom:3px solid rgba(255,255,255,.9);border-radius:0;background:linear-gradient(115deg,#11151d 0%,#24161d 100%);box-shadow:0 8px 28px #1113;color:#fff}.header-inner{display:flex;align-items:center;gap:22px}.header-switch{margin-left:auto;flex:0 0 auto;background:rgba(255,255,255,.94);border-color:#ffffff66;box-shadow:none;padding:4px}.header-switch button{font-size:12px;padding:10px 16px}.admin-icon{margin-left:0;flex:0 0 auto;min-width:88px;height:42px;padding:0 11px;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid #ffffff30;border-radius:9px;background:linear-gradient(180deg,#303038,#1c1b22);color:#fff;cursor:pointer;box-shadow:0 3px 10px #0003;transition:background .2s,border-color .2s,transform .2s}.admin-icon:hover{background:linear-gradient(180deg,#ff382b,#d9160b);border-color:#ff655b;transform:translateY(-1px)}.admin-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.admin-label{font-size:10px;font-weight:900;letter-spacing:1px}.header-logo{display:block;width:112px;height:92px;object-fit:contain;flex:0 0 112px}.header-title h1{margin:0;font-size:28px;line-height:1.2;font-weight:800;letter-spacing:.2px;color:#fff}.header-title p{margin:2px 0 0;font-size:15px;line-height:1.3;color:#c8ccd4;font-weight:400;letter-spacing:.15px}.site-header:after{content:"";display:block;position:absolute;left:0;right:0;bottom:-12px;height:10px;background:linear-gradient(125deg,#215AA8 0 11%,#FE1B0A 11% 94%,#e8e8e8 94%);clip-path:polygon(0 0,100% 0,99% 100%,0 100%);z-index:2}
 .brand{display:none;min-width:255px;line-height:.95;font-weight:950;font-style:italic;letter-spacing:-1.4px;font-size:25px;transform:skew(-5deg);color:#fff;padding-right:22px;border-right:1px solid #ffffff66}
@@ -179,10 +179,17 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 @media(max-width:1050px){.layout .section-heading{font-size:19px!important}}
 @media(max-width:620px){.layout .section-heading{font-size:17px!important;min-height:32px!important;gap:8px!important;padding:7px 10px!important}.layout .section-heading .marker{height:20px!important}}
 
+/* Typography pairing: Montserrat for display headings, Open Sans for tables/body */
+body{font-family:'Open Sans',Arial,Helvetica,sans-serif!important}
+h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.round-label,.bracket-match-title,.final-kicker{font-family:'Montserrat','Open Sans',Arial,sans-serif!important}
+.schedule-team,.time-row,.result-row,.mini-standings table,.match-id,.versus,.bracket-team,.semi-caption{font-family:'Open Sans',Arial,sans-serif!important}
+.header-title h1{font-family:'Montserrat','Open Sans',Arial,sans-serif!important}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="site-header">
