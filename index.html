@@ -144,14 +144,19 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 #standingsSidebar .mini-standings tbody td{background:rgba(255,255,255,.28)!important}
 #standingsSidebar .mini-standings tbody tr:nth-child(even) td{background:rgba(225,229,235,.24)!important}
 
-/* Stretch Schedule panel to match the full Standings column height */
+/* Keep schedule aligned at the top; distribute extra height across match rows */
 @media(min-width:1051px){
-  .layout{align-items:stretch!important}
-  .layout>.left-col{height:100%;min-height:100%}
-  #schedulePanel{height:100%;display:flex;flex-direction:column}
-  #schedulePanel .schedule-grid{flex:1;min-height:100%;height:100%;align-content:stretch}
-  #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{display:grid;grid-template-rows:repeat(13,minmax(0,1fr));min-height:0}
-  #schedulePanel .schedule-match,#schedulePanel .time-row,#schedulePanel .result-row{height:auto;min-height:0}
+  .layout{align-items:start!important}
+  .layout>.left-col{height:auto;min-height:0}
+  #schedulePanel{height:auto;display:block}
+  #schedulePanel .schedule-grid{height:auto;min-height:0;align-content:stretch}
+  #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{display:grid;grid-template-rows:repeat(13,minmax(42px,1fr));min-height:0;align-self:stretch}
+  #schedulePanel .schedule-match,#schedulePanel .time-row,#schedulePanel .result-row{height:auto;min-height:42px}
+  #schedulePanel .schedule-match{grid-template-rows:14px minmax(28px,1fr)}
+}
+@media(min-width:1051px) and (min-height:760px){
+  #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{grid-template-rows:repeat(13,minmax(46px,1fr))}
+  #schedulePanel .schedule-match{grid-template-rows:14px minmax(32px,1fr)}
 }
 @media(max-width:1050px){
   #schedulePanel .schedule-grid{height:auto}
