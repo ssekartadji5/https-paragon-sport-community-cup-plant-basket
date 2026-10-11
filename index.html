@@ -114,14 +114,16 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 .mini-standings td{background:rgba(255,255,255,.50)}
 .mini-standings tbody tr:nth-child(even) td{background:rgba(225,229,235,.42)}
 
-/* Match IDs: visually distinguish men's and women's fixtures */
-.schedule-match{grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);grid-template-rows:14px minmax(26px,1fr);position:relative}
-.schedule-match .match-id{grid-column:1/-1;grid-row:1;align-self:center;text-align:left;padding:1px 6px 0;font-size:8px;line-height:1;font-weight:950;letter-spacing:.45px}
-.schedule-match .match-id.men{color:#245da8}
-.schedule-match .match-id.women{color:#c31f56}
-.schedule-match .schedule-team{grid-row:2}
-.schedule-match .versus{grid-row:2}
-@media(max-width:620px){.schedule-match{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);grid-template-rows:13px minmax(26px,1fr)}.schedule-match .match-id{font-size:7px;padding-left:3px}}
+/* Match IDs: compact, explicit two-row layout keeps every court aligned with time/score */
+#schedulePanel .schedule-match{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);grid-template-rows:12px 24px;grid-auto-rows:unset;align-items:stretch;min-height:36px;height:36px;padding:0;position:relative;overflow:hidden}
+#schedulePanel .schedule-match .match-id{grid-column:1/4;grid-row:1;align-self:center;text-align:left;padding:0 6px;font-size:7px;line-height:10px;font-weight:950;letter-spacing:.4px;white-space:nowrap}
+#schedulePanel .schedule-match .match-id.men{color:#245da8}
+#schedulePanel .schedule-match .match-id.women{color:#c31f56}
+#schedulePanel .schedule-match .schedule-team:first-of-type{grid-column:1;grid-row:2;padding:3px 2px;font-size:10px;line-height:1.05}
+#schedulePanel .schedule-match .versus{grid-column:2;grid-row:2;margin:4px 2px;font-size:8px}
+#schedulePanel .schedule-match .schedule-team:last-of-type{grid-column:3;grid-row:2;padding:3px 2px;font-size:10px;line-height:1.05}
+#schedulePanel .time-row,#schedulePanel .result-row{min-height:36px;height:36px;padding:4px 2px}
+@media(max-width:620px){#schedulePanel .schedule-match{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);grid-template-rows:12px 24px;min-height:36px;height:36px}#schedulePanel .schedule-match .match-id{font-size:6px;padding-left:3px}#schedulePanel .schedule-match .schedule-team{font-size:8px}#schedulePanel .schedule-match .versus{font-size:7px;margin:5px 1px}}
 /* Stronger transparency for the Schedule & Standings view */
 #schedulePanel .schedule-grid{background:rgba(255,255,255,.22)!important;border-color:rgba(255,255,255,.45)!important}
 #schedulePanel .court-title,#schedulePanel .time-title,#schedulePanel .result-title{background:rgba(233,237,242,.38)!important}
