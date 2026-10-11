@@ -277,6 +277,24 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
  #babak .women-final-match .bracket-team{padding:5px 6px!important;margin-top:3px!important}
 }
 
+/* TV Final: give Women's Final a balanced championship-stage composition */
+@media (min-width:1400px) and (min-height:760px){
+ #babak .women-final-card{flex:0 0 auto!important;min-height:0!important;position:relative!important;overflow:hidden!important;background:rgba(255,255,255,.78)!important}
+ #babak .women-final-card:after{content:"";position:absolute;right:14px;bottom:-52px;width:190px;height:190px;border:2px solid rgba(33,90,168,.10);border-radius:50%;box-shadow:0 0 0 18px rgba(33,90,168,.035),0 0 0 38px rgba(33,90,168,.025);pointer-events:none}
+ #babak .women-final-card>.card-head{padding:9px 14px 7px!important;font-size:13px!important;background:linear-gradient(90deg,rgba(232,241,255,.96),rgba(255,255,255,.78))!important}
+ #babak .women-final-layout{position:relative!important;z-index:1!important;grid-template-columns:minmax(210px,.65fr) minmax(0,1.35fr)!important;align-items:stretch!important;gap:14px!important;padding:12px 14px 14px!important}
+ #babak .women-final-note{min-height:118px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:7px!important;padding:18px!important;border-radius:14px!important}
+ #babak .women-final-icon{font-size:30px!important}
+ #babak .women-final-note strong{font-family:'Montserrat','Open Sans',sans-serif!important;font-size:16px!important;letter-spacing:.7px!important}
+ #babak .women-final-note small{font-size:10px!important;line-height:1.5!important}
+ #babak .women-final-match{display:flex!important;flex-direction:column!important;justify-content:center!important;gap:8px!important;padding:12px!important;border:1px solid rgba(33,90,168,.22)!important;border-radius:14px!important;background:linear-gradient(135deg,rgba(237,245,255,.9),rgba(255,255,255,.88))!important;position:relative!important}
+ #babak .women-final-match:before{content:"FINAL MATCHUP";display:block;font-family:'Montserrat','Open Sans',sans-serif;font-size:10px;font-weight:900;letter-spacing:1.2px;color:#245ba0;margin:0 0 2px}
+ #babak .women-final-match .bracket-team{min-height:54px!important;display:flex!important;gap:12px!important;align-items:center!important;padding:10px 12px!important;margin:0!important;border-radius:9px!important;border-color:#c9dafa!important;background:rgba(255,255,255,.95)!important}
+ #babak .women-final-match .seed{width:34px!important;height:34px!important;flex-basis:34px!important;font-size:11px!important}
+ #babak .women-final-match .bracket-team-name{font-family:'Montserrat','Open Sans',sans-serif!important;font-size:clamp(12px,.82vw,15px)!important;font-weight:900!important}
+ #babak .women-final-match .bracket-score{font-size:20px!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
