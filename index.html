@@ -114,6 +114,14 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 .mini-standings td{background:rgba(255,255,255,.50)}
 .mini-standings tbody tr:nth-child(even) td{background:rgba(225,229,235,.42)}
 
+/* Match IDs: visually distinguish men's and women's fixtures */
+.schedule-match{grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);grid-template-rows:14px minmax(26px,1fr);position:relative}
+.schedule-match .match-id{grid-column:1/-1;grid-row:1;align-self:center;text-align:left;padding:1px 6px 0;font-size:8px;line-height:1;font-weight:950;letter-spacing:.45px}
+.schedule-match .match-id.men{color:#245da8}
+.schedule-match .match-id.women{color:#c31f56}
+.schedule-match .schedule-team{grid-row:2}
+.schedule-match .versus{grid-row:2}
+@media(max-width:620px){.schedule-match{grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);grid-template-rows:13px minmax(26px,1fr)}.schedule-match .match-id{font-size:7px;padding-left:3px}}
 /* Stronger transparency for the Schedule & Standings view */
 #schedulePanel .schedule-grid{background:rgba(255,255,255,.22)!important;border-color:rgba(255,255,255,.45)!important}
 #schedulePanel .court-title,#schedulePanel .time-title,#schedulePanel .result-title{background:rgba(233,237,242,.38)!important}
@@ -237,7 +245,26 @@ const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1',
 const matches=[];
 let category='Putra',date='all';
 function displayTeam(name){const n=name.trim().toUpperCase();const men=n.match(/^PUTRA\s*(\d+)$/);if(men){const num=Number(men[1]);if(num>=1&&num<=5)return 'TEAM A'+num;if(num>=6&&num<=10)return 'TEAM B'+(num-5);}const women=n.match(/^(?:TIM\s*)?PUTRI\s*(\d+)$/);if(women)return 'TEAM P'+women[1];return name;}
-function renderSchedule(){document.getElementById('courtOne').innerHTML=scheduleRows.map(m=>'<div class="schedule-match"><div class="schedule-team">'+displayTeam(m.left[0])+'</div><div class="versus">VS</div><div class="schedule-team">'+displayTeam(m.left[1])+'</div></div>').join('');document.getElementById('matchTimes').innerHTML=scheduleRows.map(m=>'<div class="time-row">'+m.time+'</div>').join('');document.getElementById('courtFour').innerHTML=scheduleRows.map(m=>'<div class="schedule-match"><div class="schedule-team">'+displayTeam(m.right[0])+'</div><div class="versus">VS</div><div class="schedule-team">'+displayTeam(m.right[1])+'</div></div>').join('');document.getElementById('resultOne').innerHTML=scheduleRows.map(()=>'<div class="result-row"><span class="result-pending">— : —</span></div>').join('');document.getElementById('resultFour').innerHTML=scheduleRows.map(()=>'<div class="result-row"><span class="result-pending">— : —</span></div>').join('');}
+function renderSchedule(){
+ const counters={Putra:0,Putri:0};
+ const codedRows=scheduleRows.map(m=>{
+   const leftWomen=m.left.some(n=>/PUTRI/i.test(n));
+   const rightWomen=m.right.some(n=>/PUTRI/i.test(n));
+   const leftType=leftWomen?'Putri':'Putra';
+   const rightType=rightWomen?'Putri':'Putra';
+   counters[leftType]++;
+   const leftCode=(leftWomen?'W':'M')+String(counters[leftType]).padStart(2,'0');
+   counters[rightType]++;
+   const rightCode=(rightWomen?'W':'M')+String(counters[rightType]).padStart(2,'0');
+   return {...m,leftType,rightType,leftCode,rightCode};
+ });
+ const matchHtml=(teams,code,type)=>'<div class="match-id '+(type==='Putri'?'women':'men')+'">'+(type==='Putri'?'WOMEN':'MEN')+' · '+code+'</div><div class="schedule-team">'+displayTeam(teams[0])+'</div><div class="versus">VS</div><div class="schedule-team">'+displayTeam(teams[1])+'</div>';
+ document.getElementById('courtOne').innerHTML=codedRows.map(m=>'<div class="schedule-match">'+matchHtml(m.left,m.leftCode,m.leftType)+'</div>').join('');
+ document.getElementById('matchTimes').innerHTML=scheduleRows.map(m=>'<div class="time-row">'+m.time+'</div>').join('');
+ document.getElementById('courtFour').innerHTML=codedRows.map(m=>'<div class="schedule-match">'+matchHtml(m.right,m.rightCode,m.rightType)+'</div>').join('');
+ document.getElementById('resultOne').innerHTML=scheduleRows.map(()=>'<div class="result-row"><span class="result-pending">— : —</span></div>').join('');
+ document.getElementById('resultFour').innerHTML=scheduleRows.map(()=>'<div class="result-row"><span class="result-pending">— : —</span></div>').join('');
+}
 function renderTable(id,keys,categoryName){let games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');let stats=keys.map(n=>{let s={n,p:0,w:0,l:0,for:0,against:0};games.filter(m=>m.a===n||m.b===n).forEach(m=>{let isA=m.a===n,sc=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;s.p++;s.for+=sc;s.against+=opp;if(sc>opp)s.w++;else s.l++;});return s;}).sort((a,b)=>(b.w*3-a.w*3)||(b.for-b.against)-(a.for-a.against)||b.for-a.for);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td class="team">'+s.n+'</td><td>'+s.p+'</td><td>'+s.w+'</td><td>'+s.l+'</td><td><b>'+(s.w*3)+'</b></td><td>'+s.for+'</td><td>'+s.against+'</td><td>'+(s.for-s.against>0?'+':'')+(s.for-s.against)+'</td></tr>').join('');}
 function renderSidebarTable(id,keys,categoryName){const games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');const stats=keys.map(name=>{let w=0,l=0,scored=0,against=0;games.filter(m=>m.a===name||m.b===name).forEach(m=>{const isA=m.a===name,score=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;scored+=score;against+=opp;if(score>opp)w++;else if(score<opp)l++;});return {name,w,l,pts:w*3,diff:scored-against};}).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.w-a.w);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td>'+s.name+'</td><td><b>'+s.w+'</b></td><td>'+s.l+'</td><td><b>'+s.pts+'</b></td></tr>').join('');}
 function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');}
