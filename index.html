@@ -163,6 +163,22 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
   #schedulePanel .time-list,#schedulePanel .schedule-list,#schedulePanel .result-list{display:flex}
 }
 
+/* Force high-contrast section labels; keep above legacy heading rules */
+.layout .section-heading,
+.layout .section-heading.schedule-heading,
+.layout .section-heading.standings-heading{
+ display:inline-flex!important;align-self:flex-start!important;width:max-content!important;max-width:100%!important;
+ align-items:center!important;gap:10px!important;min-height:38px!important;
+ margin:0 0 8px 2px!important;padding:8px 14px 8px 10px!important;
+ border-radius:8px!important;background:rgba(18,25,38,.94)!important;color:#fff!important;
+ font-size:21px!important;line-height:1!important;font-weight:950!important;letter-spacing:1.3px!important;
+ box-shadow:0 3px 10px rgba(0,0,0,.16)!important
+}
+.layout .section-heading .marker{width:6px!important;height:23px!important;flex:0 0 6px!important;border-radius:4px!important;background:#FE1B0A!important}
+.layout .section-heading.standings-heading .marker{background:#4c91f0!important}
+@media(max-width:1050px){.layout .section-heading{font-size:19px!important}}
+@media(max-width:620px){.layout .section-heading{font-size:17px!important;min-height:32px!important;gap:8px!important;padding:7px 10px!important}.layout .section-heading .marker{height:20px!important}}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
