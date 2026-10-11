@@ -114,6 +114,12 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
 .mini-standings td{background:rgba(255,255,255,.50)}
 .mini-standings tbody tr:nth-child(even) td{background:rgba(225,229,235,.42)}
 
+/* Section labels above schedule and standings panels */
+.section-heading{display:flex;align-items:center;gap:9px;min-height:28px;margin:0 0 -4px;padding:0 2px;color:#202833;font-size:15px;line-height:1;font-weight:950;letter-spacing:1.1px}
+.section-heading .marker{width:5px;height:19px;flex:0 0 5px}
+.section-heading.standings-heading{margin-bottom:-2px}
+#standingsSidebar{gap:10px}
+@media(max-width:1050px){.section-heading{font-size:14px}}
 /* Match IDs: compact, explicit two-row layout keeps every court aligned with time/score */
 #schedulePanel .schedule-match{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);grid-template-rows:12px 24px;grid-auto-rows:unset;align-items:stretch;min-height:36px;height:36px;padding:0;position:relative;overflow:hidden}
 #schedulePanel .schedule-match .match-id{grid-column:1/4;grid-row:1;align-self:center;text-align:left;padding:0 6px;font-size:7px;line-height:10px;font-weight:950;letter-spacing:.4px;white-space:nowrap}
@@ -155,6 +161,7 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
   
   <div class="layout">
     <div class="left-col">
+      <div class="section-heading schedule-heading"><span class="marker"></span><span>SCHEDULES</span></div>
       <section class="card" id="schedulePanel" aria-label="Jadwal dan skor">
         <div class="schedule-grid">
           <div class="time-title">TIME</div><div class="court-title court-one">COURT 1</div><div class="result-title result-one">SCORE</div><div class="court-title court-four">COURT 4</div><div class="result-title result-four">SCORE</div>
@@ -163,6 +170,7 @@ footer{text-align:center;padding:24px;color:#555d68;font-size:11px}
       </section>
     </div>
     <aside class="right-col standings-sidebar" id="standingsSidebar" aria-label="Klasemen sementara">
+      <div class="section-heading standings-heading"><span class="marker blue"></span><span>STANDINGS</span></div>
       <section class="card mini-standings"><div class="card-head"><span class="marker blue"></span>MEN’S STANDINGS · GROUP A</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideGroupA"></tbody></table></div></section>
       <section class="card mini-standings"><div class="card-head"><span class="marker"></span>MEN’S STANDINGS · GROUP B</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideGroupB"></tbody></table></div></section>
       <section class="card mini-standings"><div class="card-head"><span class="marker blue"></span>WOMEN’S STANDINGS</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideWomen"></tbody></table></div></section>
