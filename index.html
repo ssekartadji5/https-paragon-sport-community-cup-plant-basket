@@ -558,6 +558,12 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
   #babak .men-connector-overlay{inset:0 0 0 0!important}
 }
 
+
+/* Use live element measurements for connector positions at every viewport size */
+@media(min-width:851px){
+  #babak .men-connector-overlay{overflow:hidden!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
@@ -732,11 +738,33 @@ function renderSchedule(){
 function renderTable(id,keys,categoryName){let games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');let stats=keys.map(n=>{let s={n,p:0,w:0,l:0,for:0,against:0};games.filter(m=>m.a===n||m.b===n).forEach(m=>{let isA=m.a===n,sc=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;s.p++;s.for+=sc;s.against+=opp;if(sc>opp)s.w++;else s.l++;});return s;}).sort((a,b)=>(b.w*3-a.w*3)||(b.for-b.against)-(a.for-a.against)||b.for-a.for);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td class="team">'+s.n+'</td><td>'+s.p+'</td><td>'+s.w+'</td><td>'+s.l+'</td><td><b>'+(s.w*3)+'</b></td><td>'+s.for+'</td><td>'+s.against+'</td><td>'+(s.for-s.against>0?'+':'')+(s.for-s.against)+'</td></tr>').join('');}
 function renderSidebarTable(id,keys,categoryName){const games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai');const stats=keys.map(name=>{let w=0,l=0,scored=0,against=0;games.filter(m=>m.a===name||m.b===name).forEach(m=>{const isA=m.a===name,score=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;scored+=score;against+=opp;if(score>opp)w++;else if(score<opp)l++;});return {name,w,l,pts:w*3,diff:scored-against};}).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.w-a.w);document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td>'+s.name+'</td><td><b>'+s.w+'</b></td><td>'+s.l+'</td><td><b>'+s.pts+'</b></td></tr>').join('');}
 function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');}
-document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('selected',x===b));document.getElementById('schedulePanel').hidden=(view!=='jadwal');document.getElementById('standingsSidebar').hidden=(view!=='jadwal');document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=(view!=='babak');document.getElementById('court1Page').hidden=(view!=='court1');document.getElementById('court2Page').hidden=(view!=='court2');document.querySelector('.layout').hidden=(view==='court1'||view==='court2');document.querySelector('.layout').style.gridTemplateColumns=(view==='jadwal'?'minmax(0,1.9fr) minmax(300px,.95fr)':'minmax(0,1fr)');window.scrollTo({top:0,behavior:'smooth'});}));
+function updateMenConnectorLines(){
+ const board=document.querySelector('#babak .final-four-board');
+ const svg=board?.querySelector('.men-connector-overlay');
+ const left=board?.querySelector('.left-semi .semifinal-match');
+ const right=board?.querySelector('.right-semi .semifinal-match');
+ const finalCard=board?.querySelector('.center-final');
+ const third=board?.querySelector('.center-third');
+ const gold=svg?.querySelector('.connector-gold');
+ const silver=svg?.querySelector('.connector-silver');
+ if(!board||!svg||!left||!right||!finalCard||!third||!gold||!silver)return;
+ const br=board.getBoundingClientRect();
+ const point=(el,x,y)=>{const r=el.getBoundingClientRect();return{x:r.left-br.left+r.width*x,y:r.top-br.top+r.height*y};};
+ const L=point(left,.55,1),R=point(right,.45,1);
+ const F1=point(finalCard,.30,0),F2=point(finalCard,.70,0);
+ const T1=point(third,0,.5),T2=point(third,1,.5);
+ const elbowY=Math.min(F1.y,F2.y)-Math.max(24,br.height*.045);
+ const outerLeft=Math.max(10,point(left,0,0).x-18),outerRight=Math.min(br.width-10,point(right,1,0).x+18);
+ gold.setAttribute('d',`M ${L.x} ${L.y} V ${elbowY} H ${F1.x} V ${F1.y} M ${R.x} ${R.y} V ${elbowY} H ${F2.x} V ${F2.y}`);
+ silver.setAttribute('d',`M ${outerLeft} ${L.y} V ${T1.y} H ${T1.x} M ${outerRight} ${R.y} V ${T2.y} H ${T2.x}`);
+ svg.setAttribute('viewBox',`0 0 ${br.width} ${br.height}`);
+}
+
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('selected',x===b));document.getElementById('schedulePanel').hidden=(view!=='jadwal');document.getElementById('standingsSidebar').hidden=(view!=='jadwal');document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=(view!=='babak');document.getElementById('court1Page').hidden=(view!=='court1');document.getElementById('court2Page').hidden=(view!=='court2');document.querySelector('.layout').hidden=(view==='court1'||view==='court2');document.querySelector('.layout').style.gridTemplateColumns=(view==='jadwal'?'minmax(0,1.9fr) minmax(300px,.95fr)':'minmax(0,1fr)');window.scrollTo({top:0,behavior:'smooth'});if(view==='babak')requestAnimationFrame(updateMenConnectorLines);}));
 document.querySelectorAll('[data-date]').forEach(b=>b.addEventListener('click',()=>{date=b.dataset.date;document.querySelectorAll('[data-date]').forEach(x=>x.classList.toggle('selected',x===b));renderSchedule();}));
 document.querySelectorAll('[data-section]').forEach(b=>b.addEventListener('click',()=>{let id=b.dataset.section;document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('[data-section]').forEach(x=>x.classList.toggle('active',x===b));}));
 document.getElementById('adminOpen').addEventListener('click',()=>alert('Admin Control akan diaktifkan setelah autentikasi aman dan koneksi Supabase disiapkan.'));
-document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.getElementById('court1Page').hidden=true;document.getElementById('court2Page').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();
+document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.getElementById('court1Page').hidden=true;document.getElementById('court2Page').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();window.addEventListener('resize',()=>requestAnimationFrame(updateMenConnectorLines));requestAnimationFrame(updateMenConnectorLines);
 </script>
 </body>
 </html>
