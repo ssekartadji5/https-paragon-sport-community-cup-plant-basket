@@ -251,6 +251,32 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
  footer{padding:2px 8px!important}
 }
 
+/* TV FINAL view: remove schedule column and fit both finals cards into the screen */
+@media (min-width:1400px) and (min-height:760px){
+ .layout:has(#babak:not([hidden])){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:8px!important}
+ .layout:has(#babak:not([hidden]))>.left-col{display:none!important}
+ .layout:has(#babak:not([hidden]))>#babak{display:flex!important;grid-column:1/-1!important;grid-row:1!important;width:100%!important;height:100%!important;min-height:0!important;gap:8px!important;overflow:hidden!important}
+ #babak .final-tournament-card{flex:1 1 0!important;min-height:0!important;display:flex!important;flex-direction:column!important}
+ #babak .final-tournament-card>.card-head,#babak .women-final-card>.card-head{flex:0 0 auto!important;padding:7px 12px 5px!important;font-size:12px!important}
+ #babak .final-four-board{flex:1 1 auto!important;min-height:0!important;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr) minmax(0,1fr)!important;align-items:center!important;padding:4px 12px 8px!important;gap:12px!important}
+ #babak .final-four-side{min-width:0!important}
+ #babak .final-four-side .round-label{font-size:10px!important;margin-bottom:4px!important}
+ #babak .final-four-side .bracket-match{padding:7px!important}
+ #babak .final-four-side .bracket-team,#babak .final-four-center .bracket-team{padding:5px 6px!important;margin-top:4px!important}
+ #babak .final-four-side .bracket-team-name,#babak .final-four-center .bracket-team-name{font-size:clamp(10px,.72vw,13px)!important}
+ #babak .final-four-center{gap:8px!important;padding:4px 0!important;min-width:0!important}
+ #babak .final-four-center .bracket-match{padding:7px!important}
+ #babak .final-four-center .bracket-match-title{font-size:10px!important;margin-bottom:4px!important}
+ #babak .final-four-center .bracket-score{font-size:14px!important}
+ #babak .semi-caption{font-size:8px!important;margin-top:5px!important}
+ #babak .women-final-card{flex:0 0 auto!important;min-height:0!important}
+ #babak .women-final-layout{grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr)!important;gap:10px!important;padding:6px 12px 10px!important}
+ #babak .women-final-note{padding:10px!important}
+ #babak .women-final-note strong{font-size:12px!important}
+ #babak .women-final-match{padding:6px!important}
+ #babak .women-final-match .bracket-team{padding:5px 6px!important;margin-top:3px!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
