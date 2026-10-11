@@ -295,6 +295,20 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
  #babak .women-final-match .bracket-score{font-size:20px!important}
 }
 
+/* Women's Final: vertical matchup plus a dedicated champion name box */
+.women-final-layout{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;align-items:stretch!important}
+.women-final-match{grid-row:1!important}
+.women-final-note{grid-row:2!important;display:flex!important;flex-direction:row!important;align-items:center!important;min-height:0!important;padding:12px 16px!important}
+.women-champion-name{display:inline-flex;align-items:center;min-height:34px;min-width:260px;margin-top:8px;padding:7px 12px;border:2px solid #d6a637;border-radius:8px;background:rgba(255,255,255,.92);color:#765014;font-family:'Montserrat','Open Sans',sans-serif;font-size:14px;font-weight:900;letter-spacing:.5px}
+@media(min-width:1400px) and (min-height:760px){
+ #babak .women-final-layout{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:10px!important;padding:10px 14px 14px!important}
+ #babak .women-final-match{grid-row:1!important;padding:12px!important}
+ #babak .women-final-match .bracket-team{min-height:48px!important}
+ #babak .women-final-note{grid-row:2!important;min-height:88px!important;flex-direction:row!important;align-items:center!important;gap:14px!important;padding:12px 18px!important}
+ #babak .women-final-note>div{flex:1!important}
+ #babak .women-champion-name{display:flex!important;width:100%!important;max-width:460px!important;min-width:0!important;min-height:34px!important;font-size:14px!important;margin-top:7px!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
@@ -370,11 +384,11 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
       <section class="card women-final-card">
         <div class="card-head"><span class="marker blue"></span>WOMEN’S FINAL <span class="final-kicker">GROUP STAGE QUALIFIERS</span></div>
         <div class="women-final-layout">
-          <div class="women-final-note"><span class="women-final-icon">🏆</span><div><strong>GRAND FINAL</strong><small>TOP 2 TEAMS FROM THE GROUP</small></div></div>
           <div class="women-final-match">
             <div class="bracket-team"><span class="seed blue-seed">1</span><span class="bracket-team-name">WOMEN’S RANK #1</span><span class="bracket-score">—</span></div>
             <div class="bracket-team"><span class="seed blue-seed">2</span><span class="bracket-team-name">WOMEN’S RANK #2</span><span class="bracket-score">—</span></div>
           </div>
+          <div class="women-final-note"><span class="women-final-icon">🏆</span><div><strong>GRAND FINAL · CHAMPION</strong><small>WINNER OF WOMEN’S FINAL</small><div class="women-champion-name">WINNER TEAM NAME</div></div></div>
         </div>
       </section>
       
