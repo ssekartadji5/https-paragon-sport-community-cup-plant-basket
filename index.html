@@ -357,6 +357,16 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
  #babak .women-final-card>.card-head .marker{width:7px!important;height:27px!important;flex:0 0 7px!important}
 }
 
+/* Add breathing room above the third-place game, separating it from the final */
+@media (min-width:1400px) and (min-height:760px){
+ #babak .final-four-center .center-third{margin-top:18px!important}
+ #babak .final-four-center .center-final{margin-bottom:0!important}
+ #babak .final-four-center{row-gap:18px!important}
+}
+@media(max-width:1399px){
+ #babak .final-four-center .center-third{margin-top:14px!important}
+}
+
 [hidden]{display:none!important}
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
