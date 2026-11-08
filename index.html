@@ -752,16 +752,14 @@ function renderSchedule(){
    if(!m)return '<div class="schedule-match"><div class="schedule-team">—</div><div class="versus">VS</div><div class="schedule-team">—</div></div>';
    counters[type]++;
    const code=(type==='Putri'?'W':'M')+String(counters[type]).padStart(2,'0');
-   const score=(m.status==='Selesai'&&m.sa!==null&&m.sb!==null)
-     ?'<span class="result-score">'+m.sa+' : '+m.sb+'</span>'
-     :'<span class="result-pending">— : —</span>';
-   return '<div class="schedule-match"><div class="match-id '+(type==='Putri'?'women':'men')+'">'+(type==='Putri'?'WOMEN':'MEN')+' · '+code+'</div><div class="schedule-team">'+displayTeam(m.a)+'</div><div class="versus">VS</div><div class="schedule-team">'+displayTeam(m.b)+'</div><div class="match-result">'+score+'</div></div>';
+   return '<div class="schedule-match"><div class="match-id '+(type==='Putri'?'women':'men')+'">'+(type==='Putri'?'WOMEN':'MEN')+' · '+code+'</div><div class="schedule-team">'+displayTeam(m.a)+'</div><div class="versus">VS</div><div class="schedule-team">'+displayTeam(m.b)+'</div></div>';
  };
  document.getElementById('courtOne').innerHTML=scheduleRows.map(row=>matchHtml(row.left,row.left?.category||'Putra')).join('');
  document.getElementById('matchTimes').innerHTML=scheduleRows.map(row=>'<div class="time-row">'+row.time+'</div>').join('');
  document.getElementById('courtFour').innerHTML=scheduleRows.map(row=>matchHtml(row.right,row.right?.category||'Putra')).join('');
- document.getElementById('resultOne').innerHTML='';
- document.getElementById('resultFour').innerHTML='';
+ const scoreHtml=m=>(m&&m.status==='Selesai'&&m.sa!==null&&m.sb!==null)?'<div class="result-row"><span class="result-score">'+m.sa+' : '+m.sb+'</span></div>':'<div class="result-row"><span class="result-pending">— : —</span></div>';
+ document.getElementById('resultOne').innerHTML=scheduleRows.map(row=>scoreHtml(row.left)).join('');
+ document.getElementById('resultFour').innerHTML=scheduleRows.map(row=>scoreHtml(row.right)).join('');
 }
 function renderTable(id,keys,categoryName){
  let games=matches.filter(m=>m.category===categoryName&&m.status==='Selesai'&&m.sa!==null&&m.sb!==null);
