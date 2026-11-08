@@ -731,7 +731,8 @@ function loadBasketballData(){
           homeId:m.homeId,awayId:m.awayId,time:m.time,court:m.court
         })));
         const byTime={};
-        data.matches.forEach(m=>{
+        const normalizedMatches=matches.slice();
+        normalizedMatches.forEach(m=>{
           if(!byTime[m.time])byTime[m.time]={time:m.time,left:null,right:null};
           if(String(m.court).toLowerCase().includes('1'))byTime[m.time].left=m;
           else byTime[m.time].right=m;
