@@ -568,6 +568,23 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 @media(max-width:1050px){.site-header{flex-wrap:wrap;gap:10px}.brand{min-width:180px}.nav{order:3;flex-basis:100%;overflow-x:auto;justify-content:flex-start}.layout{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr}.standings{grid-template-columns:1fr 1fr}}
 @media(max-width:1050px){.header-switch{order:4;flex-basis:100%;margin:4px 0 0 auto;justify-content:flex-end}.header-inner{flex-wrap:wrap}}\n@media(max-width:650px){body{background-size:auto 100vh}.site-header{width:100%;top:0;margin-top:0;padding:16px}.header-inner{gap:12px}.header-logo{width:76px;height:64px;flex-basis:76px}.admin-icon{min-width:72px;height:36px;padding:0 8px}.admin-icon svg{width:15px;height:15px}.admin-label{font-size:9px}.header-switch{order:0;flex:1 1 100%;margin:4px 0 0;justify-content:center}.header-switch button{font-size:10px;padding:9px 13px}.header-title h1{font-size:20px}.header-title p{font-size:12px}.brand{font-size:21px;min-width:unset;flex:1}.admin-btn{font-size:11px;padding:10px}.nav button{font-size:11px;padding:10px}.nav{gap:0}main{width:calc(100% - 18px)}.page-title{align-items:flex-start;flex-direction:column}.switch{align-self:flex-end}.date-tabs button{min-width:110px;padding:10px}.standings,.right-col{grid-template-columns:1fr}.knockout-grid{grid-template-columns:1fr}.card-head{font-size:15px}}
 
+/* Basketball admin password-only login */
+.admin-login-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(8,12,20,.72);display:none;align-items:center;justify-content:center;padding:18px}
+.admin-login-backdrop.open{display:flex}
+.admin-login-card{width:min(100%,420px);background:#fff;color:#171b22;border-radius:18px;padding:26px;box-shadow:0 24px 80px #0006}
+.admin-login-card h2{margin:0 0 6px;font:800 22px Montserrat,Arial,sans-serif}
+.admin-login-card p{margin:0 0 20px;color:#677080;font-size:13px;line-height:1.5}
+.admin-login-card label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}
+.admin-login-card input{width:100%;padding:13px 14px;border:1px solid #d7dce3;border-radius:10px;font:inherit;outline:none}
+.admin-login-card input:focus{border-color:#fe1b0a;box-shadow:0 0 0 3px #fe1b0a20}
+.admin-login-actions{display:flex;gap:10px;margin-top:16px}
+.admin-login-actions button{flex:1;border:0;border-radius:10px;padding:12px 14px;font-weight:800}
+.admin-login-submit{background:#fe1b0a;color:#fff}
+.admin-login-cancel{background:#eef0f3;color:#252a33}
+.admin-login-message{min-height:20px;margin-top:12px!important;margin-bottom:0!important;font-size:12px!important}
+.admin-login-message.error{color:#b91c1c}
+.admin-login-message.success{color:#187345}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -576,7 +593,76 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
   <div class="header-inner"><img class="header-logo" src="./Logo%20Paragon%20Sport%20Community%20Cup%20-%20White%20(1).png" alt="Logo Paragon Sport Community Cup"><div class="header-title"><h1>Sport Community Cup Plant - 2026</h1><p>PARAGON BASKETBALL PLANT</p></div><nav class="header-switch switch section-switch" aria-label="Website sections"><button class="selected" data-view="jadwal">SCHEDULE &amp; STANDINGS</button><button data-view="babak">FINAL</button></nav></div>
 </header>
 
+<main>
+  <section class="page-title" id="jadwal">
+    <div aria-hidden="true"></div>
 
+  </section>
+  
+  <div class="layout">
+    <div class="left-col">
+      <div class="section-heading schedule-heading"><span class="marker"></span><span>SCHEDULES</span></div>
+      <section class="card" id="schedulePanel" aria-label="Jadwal dan skor">
+        <div class="schedule-grid">
+          <div class="time-title">TIME</div><div class="court-title court-one">COURT 1</div><div class="result-title result-one">SCORE</div><div class="court-title court-four">COURT 4</div><div class="result-title result-four">SCORE</div>
+          <div class="time-list" id="matchTimes"></div><div class="schedule-list" id="courtOne"></div><div class="result-list" id="resultOne"></div><div class="schedule-list" id="courtFour"></div><div class="result-list" id="resultFour"></div>
+        </div>
+      </section>
+    </div>
+    <aside class="right-col standings-sidebar" id="standingsSidebar" aria-label="Klasemen sementara">
+      <div class="section-heading standings-heading"><span class="marker blue"></span><span>STANDINGS</span></div>
+      <section class="card mini-standings"><div class="card-head"><span class="marker blue"></span>MEN’S STANDINGS · GROUP A</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideGroupA"></tbody></table></div></section>
+      <section class="card mini-standings"><div class="card-head"><span class="marker"></span>MEN’S STANDINGS · GROUP B</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideGroupB"></tbody></table></div></section>
+      <section class="card mini-standings"><div class="card-head"><span class="marker blue"></span>WOMEN’S STANDINGS</div><div class="table-wrap"><table><thead><tr><th>RANK</th><th>TEAM</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="sideWomen"></tbody></table></div></section>
+    </aside>
+    <aside class="right-col final-page" id="babak" hidden>
+      <section class="card final-tournament-card">
+        <div class="card-head"><span class="marker"></span>MEN’S PLAYOFFS <span class="final-kicker">ROAD TO THE CHAMPIONSHIP</span></div>
+        <div class="final-four-board">
+          <svg class="men-connector-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path class="connector-gold" d="M28 20 V27 H42 V43 M72 20 V27 H58 V43"/>
+            <path class="connector-silver" d="M14 20 V87 H36 M86 20 V87 H64"/>
+          </svg>
+          <div class="final-four-side left-semi">
+            <div class="round-label">SEMIFINAL 01</div>
+            <article class="bracket-match semifinal-match">
+              <div class="bracket-team"><span class="seed">A1</span><span class="bracket-team-name">GROUP A #1</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">B2</span><span class="bracket-team-name">GROUP B #2</span><span class="bracket-score">—</span></div>
+            </article>
+            <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
+          </div>
+          <div class="final-four-center">
+            <svg class="final-four-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path class="gold-path" d="M0 18 H28 V42 H50"/>
+              <path class="gold-path" d="M100 18 H72 V42 H50"/>
+              <path class="bronze-path" d="M0 80 H28 V58 H50"/>
+              <path class="bronze-path" d="M100 80 H72 V58 H50"/>
+            </svg>
+            <article class="bracket-match championship-match center-final">
+              <div class="bracket-match-title"><span>🏆 GRAND FINAL</span></div>
+              <div class="bracket-team"><span class="seed gold-seed">W1</span><span class="bracket-team-name">WINNER SF 01</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed gold-seed">W2</span><span class="bracket-team-name">WINNER SF 02</span><span class="bracket-score">—</span></div>
+            </article>
+            <div class="men-champion-box">
+              <div class="men-champion-heading"><span>🏆</span><strong>MEN’S CHAMPION</strong></div>
+              <div class="men-champion-name">WINNER TEAM NAME</div>
+            </div>
+            <article class="bracket-match third-place-match center-third">
+              <div class="bracket-match-title"><span>🥉 THIRD-PLACE GAME</span></div>
+              <div class="bracket-team"><span class="seed bronze-seed">L1</span><span class="bracket-team-name">LOSER SF 01</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed bronze-seed">L2</span><span class="bracket-team-name">LOSER SF 02</span><span class="bracket-score">—</span></div>
+            </article>
+
+          </div>
+          <div class="final-four-side right-semi">
+            <div class="round-label">SEMIFINAL 02</div>
+            <article class="bracket-match semifinal-match">
+              <div class="bracket-team"><span class="seed">B1</span><span class="bracket-team-name">GROUP B #1</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">A2</span><span class="bracket-team-name">GROUP A #2</span><span class="bracket-score">—</span></div>
+            </article>
+            <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
+          </div>
+        </div>
       </section>
       <section class="card women-final-card">
         <div class="card-head"><span class="marker blue"></span>WOMEN’S FINAL <span class="final-kicker">GROUP STAGE QUALIFIERS</span></div>
@@ -600,6 +686,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
   </section>
 </main>
 <footer>PARAGON SPORT COMMUNITY CUP — 2026 PLANT · BASKETBALL</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const BASKETBALL_DATA_API='https://script.google.com/macros/s/AKfycbzAX_WhA4Th71kCQHO5DfwqTMyaj_0RgjeNaO6VpzRWe3apPp6ViSflgRxF2uuQn7Yllg/exec';
 const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1','Team B2','Team B3','Team B4','Team B5'],W:['Team P1','Team P2','Team P3','Team P4']};
