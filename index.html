@@ -694,12 +694,15 @@ const matches=[];
 let scheduleRows=[];
 let category='Putra',date='all';
 function displayTeam(name){return name||'TBD';}
+let basketballRefreshInProgress=false;
 function loadBasketballData(){
+  if(basketballRefreshInProgress)return Promise.resolve(null);
+  basketballRefreshInProgress=true;
   return new Promise((resolve,reject)=>{
     const callback='basketballDataCallback';
     const script=document.createElement('script');
     const timeout=setTimeout(()=>{cleanup();reject(new Error('Waktu koneksi spreadsheet habis.'));},15000);
-    function cleanup(){clearTimeout(timeout);try{delete window[callback];}catch(e){window[callback]=undefined;}script.remove();}
+    function cleanup(){clearTimeout(timeout);basketballRefreshInProgress=false;try{delete window[callback];}catch(e){window[callback]=undefined;}script.remove();}
     window[callback]=(data)=>{
       cleanup();
       if(!data||!Array.isArray(data.teams)||!Array.isArray(data.matches)){reject(new Error('Format data spreadsheet tidak sesuai.'));return;}
@@ -784,7 +787,7 @@ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',(
 document.querySelectorAll('[data-date]').forEach(b=>b.addEventListener('click',()=>{date=b.dataset.date;document.querySelectorAll('[data-date]').forEach(x=>x.classList.toggle('selected',x===b));renderSchedule();}));
 document.querySelectorAll('[data-section]').forEach(b=>b.addEventListener('click',()=>{let id=b.dataset.section;document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('[data-section]').forEach(x=>x.classList.toggle('active',x===b));}));
 
-document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();loadBasketballData().then(()=>requestAnimationFrame(updateMenConnectorLines)).catch(err=>{console.error(err);const note=document.createElement('div');note.className='api-status-note';note.textContent='Data spreadsheet belum dapat dimuat: '+err.message;document.querySelector('main')?.prepend(note);});window.addEventListener('resize',()=>requestAnimationFrame(updateMenConnectorLines));requestAnimationFrame(updateMenConnectorLines);
+document.getElementById('schedulePanel').hidden=false;document.getElementById('standingsSidebar').hidden=false;document.getElementById('klasemen').hidden=true;document.getElementById('babak').hidden=true;document.querySelector('.layout').hidden=false;document.querySelector('.layout').style.gridTemplateColumns='minmax(0,1.9fr) minmax(300px,.95fr)';renderAll();loadBasketballData().then(()=>requestAnimationFrame(updateMenConnectorLines)).catch(err=>{console.error(err);const note=document.createElement('div');note.className='api-status-note';note.textContent='Data spreadsheet belum dapat dimuat: '+err.message;document.querySelector('main')?.prepend(note);});setInterval(()=>{if(!document.hidden)loadBasketballData().then(()=>requestAnimationFrame(updateMenConnectorLines)).catch(err=>console.warn('Auto-update basket:',err));},5000);window.addEventListener('resize',()=>requestAnimationFrame(updateMenConnectorLines));requestAnimationFrame(updateMenConnectorLines);
 </script>
 </body>
 </html>
