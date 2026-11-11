@@ -585,6 +585,41 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 .admin-login-message.error{color:#b91c1c}
 .admin-login-message.success{color:#187345}
 
+
+/* TV FINAL layout: center the remaining men's playoff board on wide screens */
+@media (min-width:1400px) and (min-height:760px){
+  .layout:has(#babak:not([hidden])){
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1fr)!important;
+    justify-items:center!important;
+    align-items:stretch!important;
+  }
+  .layout:has(#babak:not([hidden]))>.left-col{display:none!important}
+  .layout:has(#babak:not([hidden]))>#babak{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  #babak .final-tournament-card{
+    display:flex!important;
+    flex:0 1 auto!important;
+    flex-direction:column!important;
+    width:min(100%,1280px)!important;
+    max-width:1280px!important;
+    min-height:0!important;
+    max-height:100%!important;
+    margin:0 auto!important;
+  }
+  #babak .final-four-board{min-height:0!important}
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
