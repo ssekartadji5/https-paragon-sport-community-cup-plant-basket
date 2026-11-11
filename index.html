@@ -604,7 +604,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
       <div class="section-heading schedule-heading"><span class="marker"></span><span>SCHEDULES</span></div>
       <section class="card" id="schedulePanel" aria-label="Jadwal dan skor">
         <div class="schedule-grid">
-          <div class="time-title">TIME</div><div class="court-title court-one">COURT 1</div><div class="result-title result-one">SCORE</div><div class="court-title court-four">COURT 4</div><div class="result-title result-four">SCORE</div>
+          <div class="time-title">TIME</div><div class="court-title court-one">COURT A</div><div class="result-title result-one">SCORE</div><div class="court-title court-four">COURT B</div><div class="result-title result-four">SCORE</div>
           <div class="time-list" id="matchTimes"></div><div class="schedule-list" id="courtOne"></div><div class="result-list" id="resultOne"></div><div class="schedule-list" id="courtFour"></div><div class="result-list" id="resultFour"></div>
         </div>
       </section>
@@ -721,8 +721,9 @@ function loadBasketballData(){
         const normalizedMatches=matches.slice();
         normalizedMatches.forEach(m=>{
           if(!byTime[m.time])byTime[m.time]={time:m.time,left:null,right:null};
-          if(String(m.court).toLowerCase().includes('1'))byTime[m.time].left=m;
-          else byTime[m.time].right=m;
+          const court=String(m.court||'').trim().toUpperCase();
+          if(court==='COURT A'||court==='A'||court==='COURT 1'||court==='1')byTime[m.time].left=m;
+          else if(court==='COURT B'||court==='B'||court==='COURT 4'||court==='4')byTime[m.time].right=m;
         });
         scheduleRows=Object.values(byTime).sort((a,b)=>a.time.localeCompare(b.time));
         renderAll();
