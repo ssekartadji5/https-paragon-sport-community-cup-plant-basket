@@ -735,6 +735,7 @@ function loadBasketballData(){
       if(!data||!Array.isArray(data.teams)||!Array.isArray(data.matches)){reject(new Error('Format data spreadsheet tidak sesuai.'));return;}
       try{
         const teamById={};
+        teamMetadata=data.teams.slice();
         data.teams.forEach(t=>{teamById[t.id]=t;});
         teams.A=data.teams.filter(t=>t.category==='Putra'&&t.group==='A').map(t=>t.name);
         teams.B=data.teams.filter(t=>t.category==='Putra'&&t.group==='B').map(t=>t.name);
