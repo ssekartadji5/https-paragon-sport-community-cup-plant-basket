@@ -661,8 +661,8 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
           <div class="final-four-side left-semi">
             <div class="round-label">SEMIFINAL 01</div>
             <article class="bracket-match semifinal-match">
-              <div class="bracket-team"><span class="seed">A1</span><span class="bracket-team-name">GROUP A #1</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed">B2</span><span class="bracket-team-name">GROUP B #2</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">A1</span><span class="bracket-team-name" id="qualifierA1">GROUP A #1</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">B2</span><span class="bracket-team-name" id="qualifierB2">GROUP B #2</span><span class="bracket-score">—</span></div>
             </article>
             <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
           </div>
@@ -692,8 +692,8 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
           <div class="final-four-side right-semi">
             <div class="round-label">SEMIFINAL 02</div>
             <article class="bracket-match semifinal-match">
-              <div class="bracket-team"><span class="seed">B1</span><span class="bracket-team-name">GROUP B #1</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed">A2</span><span class="bracket-team-name">GROUP A #2</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">B1</span><span class="bracket-team-name" id="qualifierB1">GROUP B #1</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">A2</span><span class="bracket-team-name" id="qualifierA2">GROUP A #2</span><span class="bracket-score">—</span></div>
             </article>
             <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
           </div>
@@ -716,6 +716,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 <script>
 const BASKETBALL_DATA_API='https://script.google.com/macros/s/AKfycbzAX_WhA4Th71kCQHO5DfwqTMyaj_0RgjeNaO6VpzRWe3apPp6ViSflgRxF2uuQn7Yllg/exec';
 const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1','Team B2','Team B3','Team B4','Team B5'],W:['Team P1','Team P2','Team P3','Team P4']};
+let teamMetadata=[];
 const matches=[];
 let scheduleRows=[];
 let category='Putra',date='all';
@@ -786,7 +787,32 @@ function renderSidebarTable(id,keys,categoryName){
  const stats=keys.map(name=>{let w=0,l=0,scored=0,against=0;games.filter(m=>m.a===name||m.b===name).forEach(m=>{const isA=m.a===name,score=isA?m.sa:m.sb,opp=isA?m.sb:m.sa;scored+=score;against+=opp;if(score>opp)w++;else if(score<opp)l++;});return {name,w,l,pts:w*3,diff:scored-against};}).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.w-a.w);
  document.getElementById(id).innerHTML=stats.map((s,i)=>'<tr><td><span class="rank '+(i<2?'top':'')+'">'+(i+1)+'</span></td><td>'+s.name+'</td><td><b>'+s.w+'</b></td><td>'+s.l+'</td><td><b>'+s.pts+'</b></td></tr>').join('');
 }
-function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');}
+function renderFinalFourQualifiers(){
+  const completed=matches.filter(m=>m.category==='Putra'&&m.status==='Selesai'&&m.sa!==null&&m.sb!==null);
+  const rankGroup=(group)=>{
+    const groupTeams=teamMetadata.filter(t=>t.category==='Putra'&&String(t.group).toUpperCase()===group);
+    const stats=groupTeams.map(t=>({id:t.id,name:t.name,played:0,wins:0,losses:0,scored:0,against:0,points:0}));
+    const byId=Object.fromEntries(stats.map(t=>[t.id,t]));
+    completed.forEach(m=>{
+      const home=byId[m.homeId],away=byId[m.awayId];
+      if(!home||!away)return;
+      home.played++;away.played++;
+      home.scored+=Number(m.sa);home.against+=Number(m.sb);
+      away.scored+=Number(m.sb);away.against+=Number(m.sa);
+      if(Number(m.sa)>Number(m.sb)){home.wins++;away.losses++;}
+      else if(Number(m.sb)>Number(m.sa)){away.wins++;home.losses++;}
+    });
+    stats.forEach(t=>t.points=t.wins*3);
+    return stats.sort((a,b)=>b.points-a.points||(b.scored-b.against)-(a.scored-a.against)||b.wins-a.wins||b.scored-a.scored);
+  };
+  const a=rankGroup('A'),b=rankGroup('B');
+  const set=(id,team,placeholder)=>{const el=document.getElementById(id);if(el)el.textContent=team&&team.played>0?team.name:placeholder;};
+  set('qualifierA1',a[0],'GROUP A #1');
+  set('qualifierA2',a[1],'GROUP A #2');
+  set('qualifierB1',b[0],'GROUP B #1');
+  set('qualifierB2',b[1],'GROUP B #2');
+}
+function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');renderFinalFourQualifiers();}
 function updateMenConnectorLines(){
  const board=document.querySelector('#babak .final-four-board');
  const svg=board?.querySelector('.men-connector-overlay');
