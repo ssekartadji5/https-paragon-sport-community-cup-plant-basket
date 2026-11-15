@@ -819,8 +819,8 @@ function renderFinalFourQualifiers(){
   const sf01=finalById.SF01||{}, sf02=finalById.SF02||{};
   const scoreText=value=>(value===null||value===undefined||value==='')?'—':String(value);
   const completed=m=>m.scoreHome!==null&&m.scoreHome!==undefined&&m.scoreAway!==null&&m.scoreAway!==undefined&&Number(m.scoreHome)!==Number(m.scoreAway);
-  const winner=m=>completed(m)?(Number(m.scoreHome)>Number(m.scoreAway)?{name:m.homeTeam,id:m.homeId,score:m.scoreHome}:{name:m.awayTeam,id:m.awayId,score:m.scoreAway}):null;
-  const loser=m=>completed(m)?(Number(m.scoreHome)<Number(m.scoreAway)?{name:m.homeTeam,id:m.homeId,score:m.scoreHome}:{name:m.awayTeam,id:m.awayId,score:m.scoreAway}):null;
+  const winner=(m,home,away)=>completed(m)?(Number(m.scoreHome)>Number(m.scoreAway)?home:away):null;
+  const loser=(m,home,away)=>completed(m)?(Number(m.scoreHome)<Number(m.scoreAway)?home:away):null;
   const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
   const setScore=(id,value)=>setText(id,scoreText(value));
   const teamName=(id,placeholder)=>{const t=teamMetadata.find(x=>String(x.id)===String(id));return t?t.name:placeholder;};
@@ -828,8 +828,10 @@ function renderFinalFourQualifiers(){
   setScore('sf01HomeScore',sf01.scoreHome); setScore('sf01AwayScore',sf01.scoreAway);
   setScore('sf02HomeScore',sf02.scoreHome); setScore('sf02AwayScore',sf02.scoreAway);
 
-  const sf01Winner=winner(sf01), sf02Winner=winner(sf02);
-  const sf01Loser=loser(sf01), sf02Loser=loser(sf02);
+  const sf01Home=a[0]||null, sf01Away=b[1]||null;
+  const sf02Home=b[0]||null, sf02Away=a[1]||null;
+  const sf01Winner=winner(sf01,sf01Home,sf01Away), sf02Winner=winner(sf02,sf02Home,sf02Away);
+  const sf01Loser=loser(sf01,sf01Home,sf01Away), sf02Loser=loser(sf02,sf02Home,sf02Away);
   setText('grandFinalHomeName',sf01Winner?.name||'WINNER SF 01');
   setText('grandFinalAwayName',sf02Winner?.name||'WINNER SF 02');
   setText('thirdHomeName',sf01Loser?.name||'LOSER SF 01');
@@ -840,7 +842,8 @@ function renderFinalFourQualifiers(){
   setScore('grandFinalAwayScore',grandFinal.scoreAway);
   setScore('thirdHomeScore',thirdPlace.scoreHome);
   setScore('thirdAwayScore',thirdPlace.scoreAway);
-  const finalWinner=winner(grandFinal);
+  const thirdWinner=winner(thirdPlace,sf01Loser,sf02Loser);
+  const finalWinner=winner(grandFinal,sf01Winner,sf02Winner);
   setText('menChampionName',finalWinner?.name||'WINNER TEAM NAME');
 }
 function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');renderFinalFourQualifiers();}
