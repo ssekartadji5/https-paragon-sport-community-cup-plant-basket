@@ -661,8 +661,8 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
           <div class="final-four-side left-semi">
             <div class="round-label">SEMIFINAL 01</div>
             <article class="bracket-match semifinal-match">
-              <div class="bracket-team"><span class="seed">A1</span><span class="bracket-team-name" id="qualifierA1">GROUP A #1</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed">B2</span><span class="bracket-team-name" id="qualifierB2">GROUP B #2</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">A1</span><span class="bracket-team-name" id="qualifierA1">GROUP A #1</span><span class="bracket-score" id="sf01HomeScore">—</span></div>
+              <div class="bracket-team"><span class="seed">B2</span><span class="bracket-team-name" id="qualifierB2">GROUP B #2</span><span class="bracket-score" id="sf01AwayScore">—</span></div>
             </article>
             <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
           </div>
@@ -675,25 +675,25 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
             </svg>
             <article class="bracket-match championship-match center-final">
               <div class="bracket-match-title"><span>🏆 GRAND FINAL</span></div>
-              <div class="bracket-team"><span class="seed gold-seed">W1</span><span class="bracket-team-name">WINNER SF 01</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed gold-seed">W2</span><span class="bracket-team-name">WINNER SF 02</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed gold-seed">W1</span><span class="bracket-team-name" id="grandFinalHomeName">WINNER SF 01</span><span class="bracket-score" id="grandFinalHomeScore">—</span></div>
+              <div class="bracket-team"><span class="seed gold-seed">W2</span><span class="bracket-team-name" id="grandFinalAwayName">WINNER SF 02</span><span class="bracket-score" id="grandFinalAwayScore">—</span></div>
             </article>
             <div class="men-champion-box">
               <div class="men-champion-heading"><span>🏆</span><strong>MEN’S CHAMPION</strong></div>
-              <div class="men-champion-name">WINNER TEAM NAME</div>
+              <div class="men-champion-name" id="menChampionName">WINNER TEAM NAME</div>
             </div>
             <article class="bracket-match third-place-match center-third">
               <div class="bracket-match-title"><span>🥉 THIRD-PLACE GAME</span></div>
-              <div class="bracket-team"><span class="seed bronze-seed">L1</span><span class="bracket-team-name">LOSER SF 01</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed bronze-seed">L2</span><span class="bracket-team-name">LOSER SF 02</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed bronze-seed">L1</span><span class="bracket-team-name" id="thirdHomeName">LOSER SF 01</span><span class="bracket-score" id="thirdHomeScore">—</span></div>
+              <div class="bracket-team"><span class="seed bronze-seed">L2</span><span class="bracket-team-name" id="thirdAwayName">LOSER SF 02</span><span class="bracket-score" id="thirdAwayScore">—</span></div>
             </article>
 
           </div>
           <div class="final-four-side right-semi">
             <div class="round-label">SEMIFINAL 02</div>
             <article class="bracket-match semifinal-match">
-              <div class="bracket-team"><span class="seed">B1</span><span class="bracket-team-name" id="qualifierB1">GROUP B #1</span><span class="bracket-score">—</span></div>
-              <div class="bracket-team"><span class="seed">A2</span><span class="bracket-team-name" id="qualifierA2">GROUP A #2</span><span class="bracket-score">—</span></div>
+              <div class="bracket-team"><span class="seed">B1</span><span class="bracket-team-name" id="qualifierB1">GROUP B #1</span><span class="bracket-score" id="sf02HomeScore">—</span></div>
+              <div class="bracket-team"><span class="seed">A2</span><span class="bracket-team-name" id="qualifierA2">GROUP A #2</span><span class="bracket-score" id="sf02AwayScore">—</span></div>
             </article>
             <div class="semi-caption">WINNER ADVANCES TO GRAND FINAL</div>
           </div>
@@ -717,6 +717,7 @@ h1,h2,h3,.section-heading,.card-head,.court-title,.time-title,.result-title,.rou
 const BASKETBALL_DATA_API='https://script.google.com/macros/s/AKfycbzAX_WhA4Th71kCQHO5DfwqTMyaj_0RgjeNaO6VpzRWe3apPp6ViSflgRxF2uuQn7Yllg/exec';
 const teams={A:['Team A1','Team A2','Team A3','Team A4','Team A5'],B:['Team B1','Team B2','Team B3','Team B4','Team B5'],W:['Team P1','Team P2','Team P3','Team P4']};
 let teamMetadata=[];
+let finalMatches=[];
 const matches=[];
 let scheduleRows=[];
 let category='Putra',date='all';
@@ -736,6 +737,7 @@ function loadBasketballData(){
       try{
         const teamById={};
         teamMetadata=data.teams.slice();
+        finalMatches=Array.isArray(data.finalMatches)?data.finalMatches:[];
         data.teams.forEach(t=>{teamById[t.id]=t;});
         teams.A=data.teams.filter(t=>t.category==='Putra'&&t.group==='A').map(t=>t.name);
         teams.B=data.teams.filter(t=>t.category==='Putra'&&t.group==='B').map(t=>t.name);
@@ -812,6 +814,34 @@ function renderFinalFourQualifiers(){
   set('qualifierA2',a[1],'GROUP A #2');
   set('qualifierB1',b[0],'GROUP B #1');
   set('qualifierB2',b[1],'GROUP B #2');
+
+  const finalById=Object.fromEntries(finalMatches.map(m=>[String(m.id).toUpperCase(),m]));
+  const sf01=finalById.SF01||{}, sf02=finalById.SF02||{};
+  const scoreText=value=>(value===null||value===undefined||value==='')?'—':String(value);
+  const completed=m=>m.scoreHome!==null&&m.scoreHome!==undefined&&m.scoreAway!==null&&m.scoreAway!==undefined&&Number(m.scoreHome)!==Number(m.scoreAway);
+  const winner=m=>completed(m)?(Number(m.scoreHome)>Number(m.scoreAway)?{name:m.homeTeam,id:m.homeId,score:m.scoreHome}:{name:m.awayTeam,id:m.awayId,score:m.scoreAway}):null;
+  const loser=m=>completed(m)?(Number(m.scoreHome)<Number(m.scoreAway)?{name:m.homeTeam,id:m.homeId,score:m.scoreHome}:{name:m.awayTeam,id:m.awayId,score:m.scoreAway}):null;
+  const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  const setScore=(id,value)=>setText(id,scoreText(value));
+  const teamName=(id,placeholder)=>{const t=teamMetadata.find(x=>String(x.id)===String(id));return t?t.name:placeholder;};
+
+  setScore('sf01HomeScore',sf01.scoreHome); setScore('sf01AwayScore',sf01.scoreAway);
+  setScore('sf02HomeScore',sf02.scoreHome); setScore('sf02AwayScore',sf02.scoreAway);
+
+  const sf01Winner=winner(sf01), sf02Winner=winner(sf02);
+  const sf01Loser=loser(sf01), sf02Loser=loser(sf02);
+  setText('grandFinalHomeName',sf01Winner?.name||'WINNER SF 01');
+  setText('grandFinalAwayName',sf02Winner?.name||'WINNER SF 02');
+  setText('thirdHomeName',sf01Loser?.name||'LOSER SF 01');
+  setText('thirdAwayName',sf02Loser?.name||'LOSER SF 02');
+
+  const grandFinal=finalById.F01||{}, thirdPlace=finalById.TP01||{};
+  setScore('grandFinalHomeScore',grandFinal.scoreHome);
+  setScore('grandFinalAwayScore',grandFinal.scoreAway);
+  setScore('thirdHomeScore',thirdPlace.scoreHome);
+  setScore('thirdAwayScore',thirdPlace.scoreAway);
+  const finalWinner=winner(grandFinal);
+  setText('menChampionName',finalWinner?.name||'WINNER TEAM NAME');
 }
 function renderAll(){renderSchedule();renderTable('groupA',teams.A,'Putra');renderTable('groupB',teams.B,'Putra');renderTable('womenTable',teams.W,'Putri');renderSidebarTable('sideGroupA',teams.A,'Putra');renderSidebarTable('sideGroupB',teams.B,'Putra');renderSidebarTable('sideWomen',teams.W,'Putri');renderFinalFourQualifiers();}
 function updateMenConnectorLines(){
