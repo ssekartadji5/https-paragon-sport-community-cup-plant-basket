@@ -818,7 +818,7 @@ function renderFinalFourQualifiers(){
   const finalById=Object.fromEntries(finalMatches.map(m=>[String(m.id).toUpperCase(),m]));
   const sf01=finalById.SF01||{}, sf02=finalById.SF02||{};
   const scoreText=value=>(value===null||value===undefined||value==='')?'—':String(value);
-  const completed=m=>m.scoreHome!==null&&m.scoreHome!==undefined&&m.scoreAway!==null&&m.scoreAway!==undefined&&Number(m.scoreHome)!==Number(m.scoreAway);
+  const completed=m=>String(m.status||'').trim().toLowerCase()==='selesai'&&m.scoreHome!==null&&m.scoreHome!==undefined&&m.scoreAway!==null&&m.scoreAway!==undefined&&Number(m.scoreHome)!==Number(m.scoreAway);
   const winner=(m,home,away)=>completed(m)?(Number(m.scoreHome)>Number(m.scoreAway)?home:away):null;
   const loser=(m,home,away)=>completed(m)?(Number(m.scoreHome)<Number(m.scoreAway)?home:away):null;
   const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
